@@ -1,0 +1,29 @@
+import React, { useState } from "react";
+
+const Textbox = (props) => {
+  const [response, setResponse] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    props.handleResponse(props.question, response);
+    setResponse("");
+  };
+  return (
+    <div className="flex justify-start">
+      <input
+        className="bg-pink flex justify-start px-2 py-4 rounded-3xl w-2/3 mt-16"
+        type="text"
+        value={response}
+        onChange={(e) => setResponse(e.target.value)}
+      />
+      <button
+        className=" text-white font-bold mt-16 ml-6  "
+        onClick={handleSubmit}
+      >
+        Send
+      </button>
+    </div>
+  );
+};
+
+export default Textbox;
