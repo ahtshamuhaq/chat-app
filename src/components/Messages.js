@@ -1,17 +1,25 @@
 import React from "react";
-
+import "../App.css";
 const Messages = (props) => {
   return (
     <div>
-      {props.responses.map((response) => (
-        <div key={response.question}>
-          <p className={props.questionClass}>{response.question}</p>
-          {console.log("this is question", response.question)}
-          <p className={props.answerClass}>{response.response}</p>
-          {console.log("this is answer", response.response)}
+      <>
+        <div>
+          <div key={props.responses.index}>
+            <p className={props.item.question ? "question" : "qh"}>
+              {props.item.question}
+            </p>
+            {console.log(
+              "this is index of question",
+              props.question,
+              props.index
+            )}
+            <p className={props.item.response ? "answer" : "ah"}>
+              {props.item.response}
+            </p>{" "}
+          </div>
         </div>
-      ))}
-      {/*  */}
+      </>
     </div>
   );
 };

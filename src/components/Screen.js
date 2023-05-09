@@ -3,7 +3,7 @@ import Messages from "./Messages";
 import Textbox from "./Textbox";
 
 const Screen = (props) => {
-  const [questions, setQuestions] = useState([
+  const questions = [
     {
       controllType: "LABEL",
       multiSelect: false,
@@ -302,20 +302,27 @@ const Screen = (props) => {
         "P.S. everything I learn, I will share wit you in the preferences tab to your right. If you have any questions, do not hesitate to reach out - I am here for you!",
       tag: "None",
     },
-  ]);
+  ];
 
   const questionClass =
     " bg-pink flex justify-start px-2 py-4 rounded-3xl w-1/2 break-words";
   const answerClass =
     " bg-pink ml-auto mt-4 px-2 py-4 rounded-3xl w-1/2 break-words";
+  const [index, setIndex] = useState(0);
 
-  const [responses, setResponses] = useState([questions[0]]);
+  const [responses, setResponses] = useState([
+    { question: questions[index].question },
+  ]);
 
-  const handleResponse = (response) => {
-    const newResponses = [...responses, { text: response }];
-    setResponses(newResponses);
+  const handleResponse = (question, response) => {
+    setResponses([
+      ...responses,
+      { response: response },
+      { question: questions[index + 1].question },
+    ]);
+    setIndex(index + 1);
   };
-  console.log(responses);
+
   const sendButton =
     "bg-blue-500 hover:bg-blue-700 text-white font-bold mt-16 ml-6  ";
   const textBoxClass =
@@ -323,17 +330,29 @@ const Screen = (props) => {
 
   return (
     <div className={props.screen}>
-      <Messages
-        questionClass={questionClass}
-        answerClass={answerClass}
-        responses={responses}
-      />
-      <Textbox
-        sendButton={sendButton}
-        textBoxClass={textBoxClass}
-        question={questions}
-        handleResponse={handleResponse}
-      />
+      <>
+        {responses.map((item, index) => (
+          <div>
+            <Messages
+              responses={responses}
+              item={item}
+              index={index}
+              questionClass={questionClass}
+              answerClass={answerClass}
+            />
+            {console.log("this is index of response", responses)}
+          </div>
+        ))}
+      </>
+      {index < questions.length && (
+        <Textbox
+          handleResponse={handleResponse}
+          sendButton={sendButton}
+          textBoxClass={textBoxClass}
+          question={questions[index].question}
+          index={index}
+        />
+      )}
     </div>
   );
 };

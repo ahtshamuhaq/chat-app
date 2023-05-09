@@ -15,6 +15,33 @@ body {
   height: 40vmin;
   pointer-events: none;
 }
+/* 
+            <p className={props.questionClass}>{props.item.question}</p>
+*/
+/* bg-pink flex justify-start px-2 py-4 rounded-3xl w-1/2 break-words */
+.question {
+  background-color: #911354;
+  display: flex;
+  justify-content: flex-start;
+  padding: 20px 10px;
+  border-radius: 1.5rem;
+  width: 50%;
+  word-wrap: break-word;
+}
+.qh {
+  display: none;
+}
+.ah {
+  display: none;
+}
+.answer {
+  background-color: #911354;
+  margin-left: auto;
+  padding: 20px 10px;
+  border-radius: 1.5rem;
+  width: 50%;
+  word-wrap: break-word;
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
