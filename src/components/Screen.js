@@ -60,7 +60,7 @@ const Screen = (props) => {
         {
           Id: 4,
           controllType: "BUTTON",
-          name: "Yes (How would you like to be addressed?)",
+          name: "Yes",
           required: true,
           value: "",
         },
@@ -308,19 +308,26 @@ const Screen = (props) => {
     " bg-pink flex justify-start px-2 py-4 rounded-3xl w-1/2 break-words";
   const answerClass =
     " bg-pink ml-auto mt-4 px-2 py-4 rounded-3xl w-1/2 break-words";
-  const [index, setIndex] = useState(0);
+  const [qindex, setqindex] = useState(0);
 
   const [responses, setResponses] = useState([
-    { question: questions[index].question },
+    {
+      isUserResponse: false,
+      answer: questions[qindex].question,
+      options: questions[qindex].options,
+    },
   ]);
-
   const handleResponse = (question, response) => {
     setResponses([
       ...responses,
-      { response: response },
-      { question: questions[index + 1].question },
+      { isUserResponse: true, answer: response },
+      {
+        isUserResponse: false,
+        answer: questions[qindex + 1].question,
+        options: questions[qindex + 1].options,
+      },
     ]);
-    setIndex(index + 1);
+    setqindex(qindex + 1);
   };
 
   const sendButton =
@@ -330,8 +337,9 @@ const Screen = (props) => {
 
   return (
     <div className={props.screen}>
+      {console.log("check response", responses.answer)}
       <>
-        {responses.map((item, index) => (
+        {responses.map((item, index, isUSerResponse) => (
           <div>
             <Messages
               responses={responses}
@@ -344,13 +352,13 @@ const Screen = (props) => {
           </div>
         ))}
       </>
-      {index < questions.length && (
+      {qindex < questions.length && (
         <Textbox
           handleResponse={handleResponse}
           sendButton={sendButton}
           textBoxClass={textBoxClass}
-          question={questions[index].question}
-          index={index}
+          question={questions[qindex].question}
+          index={qindex}
         />
       )}
     </div>

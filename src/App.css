@@ -21,8 +21,6 @@ body {
 /* bg-pink flex justify-start px-2 py-4 rounded-3xl w-1/2 break-words */
 .question {
   background-color: #911354;
-  display: flex;
-  justify-content: flex-start;
   padding: 20px 10px;
   border-radius: 1.5rem;
   width: 50%;
