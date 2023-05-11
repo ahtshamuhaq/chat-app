@@ -7,6 +7,7 @@ const Textbox = (props) => {
     e.preventDefault();
     props.handleResponse(props.question, response);
     setResponse("");
+    console.log(props.index, props.i);
   };
   return (
     <div className="flex justify-start">
@@ -19,6 +20,7 @@ const Textbox = (props) => {
       <button
         className=" text-white font-bold mt-16 ml-6  "
         onClick={handleSubmit}
+        disabled={props.i === 10 ? true : false}
       >
         Send
       </button>

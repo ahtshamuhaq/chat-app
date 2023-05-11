@@ -342,6 +342,19 @@ const Screen = (props) => {
     setqindex(qindex + 1);
   };
 
+  const handleCountryResponse = (countryText) => {
+    setResponses([
+      ...responses,
+      { isUserResponse: true, answer: countryText },
+      {
+        isUserResponse: false,
+        answer: questions[qindex + 1].question,
+        options: questions[qindex + 1].options,
+      },
+    ]);
+    setqindex(qindex + 1);
+  };
+
   const sendButton =
     "bg-blue-500 hover:bg-blue-700 text-white font-bold mt-16 ml-6  ";
   const textBoxClass =
@@ -361,6 +374,7 @@ const Screen = (props) => {
               questionClass={questionClass}
               answerClass={answerClass}
               handleResponse={handleButtonResponse}
+              handleCountryResponse={handleCountryResponse}
             />
           </div>
         ))}
@@ -371,7 +385,8 @@ const Screen = (props) => {
           sendButton={sendButton}
           textBoxClass={textBoxClass}
           question={questions[qindex].question}
-          index={qindex}
+          index={questions[qindex]}
+          i={qindex}
         />
       )}
     </div>
