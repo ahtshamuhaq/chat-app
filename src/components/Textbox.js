@@ -7,7 +7,6 @@ const Textbox = (props) => {
     e.preventDefault();
     props.handleResponse(props.question, response);
     setResponse("");
-    console.log("response is ", props.question);
   };
   return (
     <div className="flex justify-start">

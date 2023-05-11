@@ -8,7 +8,6 @@ const Messages = ({ item, handleResponse }) => {
       <div className={item.isUserResponse ? "answer" : "question"}>
         {item.answer}
       </div>
-      {console.log("item.options", item)}
       <div className="flex w-1/2 justify-start mt-3 mb-3">
         {item.options &&
           item.options.map(

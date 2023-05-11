@@ -3,7 +3,6 @@ import React from "react";
 const Buttons = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("handleResponse", props.items.name);
     props.onClick(props.items.name);
   };
   return (
@@ -13,7 +12,6 @@ const Buttons = (props) => {
         onClick={handleSubmit}
       >
         {props.items.name}
-        {console.log("check items", props.items.name, props.index)}
       </button>
     </div>
   );
