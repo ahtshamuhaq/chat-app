@@ -309,6 +309,7 @@ const Screen = (props) => {
   const answerClass =
     " bg-pink ml-auto mt-4 px-2 py-4 rounded-3xl w-1/2 break-words";
   const [qindex, setqindex] = useState(0);
+  const [optindex, setOptindex] = useState(0);
 
   const [responses, setResponses] = useState([
     {
@@ -327,6 +328,22 @@ const Screen = (props) => {
         options: questions[qindex + 1].options,
       },
     ]);
+    console.log("responses are as ", ...responses);
+    setqindex(qindex + 1);
+  };
+
+  const handleButtonResponse = (responseText) => {
+    console.log("responseText", responseText);
+    setResponses([
+      ...responses,
+      { isUserResponse: true, answer: responseText   },
+      {
+        isUserResponse: false,
+        answer: questions[qindex + 1].question,
+        options: questions[qindex + 1].options,
+      },
+    ]);
+    console.log("responses are as ", ...responses);
     setqindex(qindex + 1);
   };
 
@@ -339,14 +356,18 @@ const Screen = (props) => {
     <div className={props.screen}>
       {console.log("check response", responses.answer)}
       <>
-        {responses.map((item, index, isUSerResponse) => (
+        {responses.map((item, index) => (
           <div>
             <Messages
               responses={responses}
+              questions={questions}
               item={item}
+              qindex={qindex}
               index={index}
               questionClass={questionClass}
               answerClass={answerClass}
+              optindex={optindex}
+              handleResponse={handleButtonResponse}
             />
             {console.log("this is index of response", responses)}
           </div>

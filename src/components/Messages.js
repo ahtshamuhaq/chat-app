@@ -1,36 +1,33 @@
 import React from "react";
 import "../App.css";
 import Buttons from "./Buttons";
-const Messages = (props) => {
-  console.log();
 
-  const isUserResponse = props.item.isUserResponse;
-  return isUserResponse === false ? (
+const Messages = ({ item, handleResponse }) => {
+  return !item.isUserResponse ? (
     <div>
-      <div className={props.item.isUserResponse ? "answer" : "question"}>
-        {props.item.answer}
+      <div className={item.isUserResponse ? "answer" : "question"}>
+        {item.answer}
       </div>
-      {console.log(props.item)}
+      {console.log("item.options", item)}
       <div className="flex w-1/2 justify-start mt-3 mb-3">
-        {props.item.options.map((items, index) => {
-          const controllType = props.item.options[index].controllType;
-          return controllType === "BUTTON" ? (
-            <div className=" ">
-              {console.log("these are items", items)}
-              <div className="">
-                <Buttons items={items} index={index} />;
-              </div>
-            </div>
-          ) : null;
-        })}
+        {item.options &&
+          item.options.map(
+            (button, index) =>
+              button.controllType === "BUTTON" && (
+                <div className="">
+                  <Buttons
+                    items={button}
+                    onClick={handleResponse}
+                    index={index}
+                  />
+                </div>
+              )
+          )}
       </div>
     </div>
   ) : (
     <>
-      <div className={props.item.isUserResponse === true ? "answer" : ""}>
-        {props.item.answer}
-      </div>
-      ;
+      <div className={item.isUserResponse ? "answer" : ""}>{item.answer}</div>
     </>
   );
 };
