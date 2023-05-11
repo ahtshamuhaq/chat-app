@@ -9,7 +9,7 @@ const Messages = ({ item, handleResponse, handleCountryResponse }) => {
       <div className={item.isUserResponse ? "answer" : "question"}>
         {item.answer}
       </div>
-      <div className="grid grid-cols-4 gap- w-1/2 mt-3 mb-2">
+      <div className="grid grid-cols-3 w-1/2 buttongrid mt-3 mb-2">
         {item.options &&
           item.options.map((button, index) =>
             button.controllType === "BUTTON" ? (

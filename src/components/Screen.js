@@ -264,7 +264,7 @@ const Screen = (props) => {
         {
           Id: 25,
           controllType: "BUTTON",
-          name: "Yes (Please tell me the detail)",
+          name: "Yes(Please tell me the detail)",
           required: true,
           value: "",
         },
