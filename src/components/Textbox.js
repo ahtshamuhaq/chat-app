@@ -7,7 +7,6 @@ const Textbox = (props) => {
     e.preventDefault();
     props.handleResponse(props.question, response);
     setResponse("");
-    console.log(props.index, props.i);
   };
   return (
     <div className="buttonIn">
