@@ -9,7 +9,7 @@ const Messages = ({ item, handleResponse, handleCountryResponse }) => {
       <div className={item.isUserResponse ? "answer" : "question"}>
         {item.answer}
       </div>
-      <div className="grid grid-cols-3 w-1/2 buttongrid mt-3 mb-2">
+      <div className="flex flex-wrap  buttongrid mt-3 mb-2">
         {item.options &&
           item.options.map((button, index) =>
             button.controllType === "BUTTON" ? (
@@ -21,7 +21,7 @@ const Messages = ({ item, handleResponse, handleCountryResponse }) => {
                 />
               </div>
             ) : button.controllType === "DDL" ? (
-              <div>
+              <div className="text-black border-0 w-1/2 ">
                 <Dropdown selectCountry={handleCountryResponse} />
               </div>
             ) : null

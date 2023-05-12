@@ -8,7 +8,7 @@ const Buttons = (props) => {
   return (
     <div>
       <button
-        className=" buttons bg-blue p-4 mr-3 break-words mb-4  text-white "
+        className=" buttons bg-[#B2B9C1] p-4 mr-3  break-words mb-4 rounded-full text-black "
         onClick={handleSubmit}
       >
         {props.items.name}
