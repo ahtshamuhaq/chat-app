@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Messages from "./Messages";
 import Textbox from "./Textbox";
 
@@ -187,7 +187,7 @@ const Screen = (props) => {
         {
           Id: 17,
           controllType: "BUTTON",
-          name: "Other (Please Specify)",
+          name: "Others  ",
           required: true,
           value: "",
         },
@@ -239,7 +239,7 @@ const Screen = (props) => {
         {
           Id: 23,
           controllType: "BUTTON",
-          name: "Other (Please Specify)",
+          name: "Others  ",
           required: true,
           value: "",
         },
@@ -309,6 +309,19 @@ const Screen = (props) => {
   const answerClass =
     " bg-pink ml-auto mt-4 px-2 py-4 rounded-3xl w-1/2 break-words";
   const [qindex, setqindex] = useState(0);
+  const [disabled, setDisabled] = useState(true);
+  useEffect(() => {
+    questions[qindex].options.length === 0
+      ? setDisabled(false)
+      : questions[qindex].options.map((button, index) => {
+          button.controllType === "TEXTBOX"
+            ? setDisabled(false)
+            : setDisabled(true);
+          console.log(button.length);
+        });
+  });
+
+  console.log(questions.length - 2);
   const [responses, setResponses] = useState([
     {
       isUserResponse: false,
@@ -373,7 +386,7 @@ const Screen = (props) => {
               index={index}
               questionClass={questionClass}
               answerClass={answerClass}
-              handleResponse={handleButtonResponse}
+              handlesResponse={handleButtonResponse}
               handleCountryResponse={handleCountryResponse}
             />
           </div>
@@ -384,8 +397,11 @@ const Screen = (props) => {
           handleResponse={handleResponse}
           sendButton={sendButton}
           textBoxClass={textBoxClass}
+          disabled={disabled}
           question={questions[qindex].question}
+          qarr={questions}
           index={questions[qindex]}
+          setDisabled={setDisabled}
           i={qindex}
         />
       )}

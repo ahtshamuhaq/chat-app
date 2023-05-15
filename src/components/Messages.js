@@ -2,8 +2,17 @@ import React from "react";
 import "../App.css";
 import Buttons from "./Buttons";
 import Dropdown from "./Dropdown";
+import Textbox from "./Textbox";
 
-const Messages = ({ item, handleResponse, handleCountryResponse }) => {
+const Messages = ({
+  i,
+  questions,
+  item,
+  handlesResponse,
+  handleCountryResponse,
+  question,
+  handleResponse,
+}) => {
   return !item.isUserResponse ? (
     <div>
       <div className={item.isUserResponse ? "answer" : "question"}>
@@ -16,7 +25,7 @@ const Messages = ({ item, handleResponse, handleCountryResponse }) => {
               <div>
                 <Buttons
                   items={button}
-                  onClick={handleResponse}
+                  onClick={handlesResponse}
                   index={index}
                 />
               </div>
