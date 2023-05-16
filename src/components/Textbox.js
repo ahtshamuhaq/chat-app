@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 
 const Textbox = (props) => {
-  const [response, setResponse] = useState("");
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.handleResponse(props.question, response);
-    setResponse("");
+    props.handleResponse(props.question, props.response);
+    props.setResponse("");
   };
   return (
     <div className="buttonIn">
@@ -14,8 +12,8 @@ const Textbox = (props) => {
         className="bg-[#4C4B51] px-2 py-4 rounded-3xl w-full mt-16 input"
         type="text"
         disabled={props.disabled}
-        value={response}
-        onChange={(e) => setResponse(e.target.value)}
+        value={props.response}
+        onChange={(e) => props.setResponse(e.target.value)}
       />
       <button
         className="  butto "

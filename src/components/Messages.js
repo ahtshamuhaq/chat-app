@@ -10,8 +10,12 @@ const Messages = ({
   item,
   handlesResponse,
   handleCountryResponse,
+  response,
+  setResponse,
   question,
+  addButton,
   handleResponse,
+  handleAddButton,
 }) => {
   return !item.isUserResponse ? (
     <div>
@@ -27,6 +31,8 @@ const Messages = ({
                   items={button}
                   onClick={handlesResponse}
                   index={index}
+                  addButton={addButton}
+                  handleAddButton={handleAddButton}
                 />
               </div>
             ) : button.controllType === "DDL" ? (

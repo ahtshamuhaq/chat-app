@@ -310,6 +310,8 @@ const Screen = (props) => {
     " bg-pink ml-auto mt-4 px-2 py-4 rounded-3xl w-1/2 break-words";
   const [qindex, setqindex] = useState(0);
   const [disabled, setDisabled] = useState(true);
+  const [response, setResponse] = useState("");
+
   useEffect(() => {
     questions[qindex].options.length === 0
       ? setDisabled(false)
@@ -354,6 +356,7 @@ const Screen = (props) => {
     ]);
     setqindex(qindex + 1);
   };
+  console.log(responses);
 
   const handleCountryResponse = (countryText) => {
     setResponses([
@@ -372,6 +375,12 @@ const Screen = (props) => {
     "bg-blue-500 hover:bg-blue-700 text-white font-bold mt-16 ml-6  ";
   const textBoxClass =
     " bg-pink flex justify-start px-2 py-4 rounded-3xl w-2/3 mt-16";
+  const handleAddButton = (buttonText) => {
+    questions[qindex].multiSelect === true
+      ? setResponse(response + "," + buttonText)
+      : setResponse("");
+    console.log("this is buttonTxt", buttonText + "," + response);
+  };
 
   return (
     <div className={props.screen}>
@@ -381,7 +390,9 @@ const Screen = (props) => {
             <Messages
               responses={responses}
               questions={questions}
+              addButton={questions[qindex]}
               item={item}
+              handleAddButton={handleAddButton}
               qindex={qindex}
               index={index}
               questionClass={questionClass}
@@ -398,7 +409,11 @@ const Screen = (props) => {
           sendButton={sendButton}
           textBoxClass={textBoxClass}
           disabled={disabled}
+          // responseText={res}
+
           question={questions[qindex].question}
+          response={response}
+          setResponse={setResponse}
           qarr={questions}
           index={questions[qindex]}
           setDisabled={setDisabled}

@@ -2,9 +2,11 @@ import React from "react";
 
 const Buttons = (props) => {
   const handleSubmit = (e) => {
-    e.preventDefault();
-    props.onClick(props.items.name);
+    props.addButton.multiSelect === true
+      ? props.handleAddButton(props.items.name)
+      : props.onClick(props.items.name);
   };
+
   return (
     <div>
       <button
