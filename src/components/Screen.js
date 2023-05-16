@@ -187,7 +187,7 @@ const Screen = (props) => {
         {
           Id: 17,
           controllType: "BUTTON",
-          name: "Others  ",
+          name: "Others",
           required: true,
           value: "",
         },
@@ -239,7 +239,7 @@ const Screen = (props) => {
         {
           Id: 23,
           controllType: "BUTTON",
-          name: "Others  ",
+          name: "Others",
           required: true,
           value: "",
         },
@@ -311,7 +311,6 @@ const Screen = (props) => {
   const [qindex, setqindex] = useState(0);
   const [disabled, setDisabled] = useState(true);
   const [response, setResponse] = useState("");
-
   useEffect(() => {
     questions[qindex].options.length === 0
       ? setDisabled(false)
@@ -321,9 +320,7 @@ const Screen = (props) => {
             : setDisabled(true);
           console.log(button.length);
         });
-  });
-
-  console.log(questions.length - 2);
+  }, [qindex]);
   const [responses, setResponses] = useState([
     {
       isUserResponse: false,
@@ -334,11 +331,30 @@ const Screen = (props) => {
   const handleResponse = (question, response) => {
     setResponses([
       ...responses,
-      { isUserResponse: true, answer: response },
+
+      {
+        isUserResponse: true,
+        answer: response,
+        setDisabled:
+          questions[qindex].options.length === 0
+            ? setDisabled(false)
+            : questions[qindex].options.map((buttons, index) => {
+                console.log("buttons.controllType is", buttons.controllType);
+
+                buttons.controllType === "TEXTBOX"
+                  ? setDisabled(false)
+                  : setDisabled(true);
+              }),
+      },
+
       {
         isUserResponse: false,
         answer: questions[qindex + 1].question,
         options: questions[qindex + 1].options,
+        setDisabled:
+          questions[qindex + 1].options.length === 0
+            ? setDisabled(false)
+            : setDisabled(true),
       },
     ]);
     setqindex(qindex + 1);
@@ -356,7 +372,6 @@ const Screen = (props) => {
     ]);
     setqindex(qindex + 1);
   };
-  console.log(responses);
 
   const handleCountryResponse = (countryText) => {
     setResponses([
@@ -370,7 +385,14 @@ const Screen = (props) => {
     ]);
     setqindex(qindex + 1);
   };
-
+  const handleNone = (buttonText) => {
+    handleButtonResponse(buttonText);
+    setResponse("");
+  };
+  const handleOther = (buttonText) => {
+    setResponse(buttonText);
+    setDisabled(false);
+  };
   const sendButton =
     "bg-blue-500 hover:bg-blue-700 text-white font-bold mt-16 ml-6  ";
   const textBoxClass =
@@ -379,7 +401,14 @@ const Screen = (props) => {
     questions[qindex].multiSelect === true
       ? setResponse(response + "," + buttonText)
       : setResponse("");
+
+    questions[qindex].multiSelect === true && buttonText === "None"
+      ? handleNone(buttonText)
+      : setResponse(response + "," + buttonText);
     console.log("this is buttonTxt", buttonText + "," + response);
+    questions[qindex].multiSelect === true && buttonText === "Others"
+      ? handleOther(buttonText)
+      : setResponse(response + "," + buttonText);
   };
 
   return (
