@@ -387,27 +387,22 @@ const Screen = (props) => {
   };
   const handleNone = (buttonText) => {
     handleButtonResponse(buttonText);
-    setResponse("");
   };
-  const handleOther = (buttonText) => {
-    setResponse(buttonText);
+  const handleOther = () => {
     setDisabled(false);
+    setResponse("");
   };
   const sendButton =
     "bg-blue-500 hover:bg-blue-700 text-white font-bold mt-16 ml-6  ";
   const textBoxClass =
     " bg-pink flex justify-start px-2 py-4 rounded-3xl w-2/3 mt-16";
   const handleAddButton = (buttonText) => {
-    questions[qindex].multiSelect === true
-      ? setResponse(response + "," + buttonText)
-      : setResponse("");
+    questions[qindex].multiSelect === true ? setResponse("") : setResponse("");
 
     questions[qindex].multiSelect === true && buttonText === "None"
       ? handleNone(buttonText)
-      : setResponse(response + "," + buttonText);
-    console.log("this is buttonTxt", buttonText + "," + response);
-    questions[qindex].multiSelect === true && buttonText === "Others"
-      ? handleOther(buttonText)
+      : questions[qindex].multiSelect === true && buttonText === "Others"
+      ? handleOther()
       : setResponse(response + "," + buttonText);
   };
 

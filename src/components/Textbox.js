@@ -6,11 +6,18 @@ const Textbox = (props) => {
     props.handleResponse(props.question, props.response);
     props.setResponse("");
   };
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      props.handleResponse(props.question, props.response);
+      props.setResponse("");
+    }
+  };
   return (
     <div className="buttonIn">
       <input
-        className="bg-[#4C4B51] px-2 py-4 rounded-3xl w-full mt-16 input"
+        className="bg-[#4C4B51] text-white  px-4 py-2 rounded-3xl w-full mt-16 input"
         type="text"
+        onKeyDown={handleKeyDown}
         disabled={props.disabled}
         value={props.response}
         onChange={(e) => props.setResponse(e.target.value)}
@@ -18,7 +25,7 @@ const Textbox = (props) => {
       <button
         className="  butto "
         onClick={handleSubmit}
-        disabled={props.i === 10 ? true : false}
+        disabled={props.i === 10 || props.response.length === 0 ? true : false}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
