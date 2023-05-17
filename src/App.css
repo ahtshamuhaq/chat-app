@@ -1,5 +1,6 @@
 body {
   color: black;
+  overflow: auto;
 }
 .show {
   display: block;
@@ -15,10 +16,7 @@ body {
   height: 40vmin;
   pointer-events: none;
 }
-/* 
-            <p className={props.questionClass}>{props.item.question}</p>
-*/
-/* bg-pink flex justify-start px-2 py-4 rounded-3xl w-1/2 break-words */
+
 .question {
   background-color: #696969;
   padding: 20px 10px;

@@ -315,10 +315,9 @@ const Screen = (props) => {
     questions[qindex].options.length === 0
       ? setDisabled(false)
       : questions[qindex].options.map((button, index) => {
-          button.controllType === "TEXTBOX"
+          return button.controllType === "TEXTBOX"
             ? setDisabled(false)
             : setDisabled(true);
-          console.log(button.length);
         });
   }, [qindex]);
   const [responses, setResponses] = useState([
@@ -341,7 +340,7 @@ const Screen = (props) => {
             : questions[qindex].options.map((buttons, index) => {
                 console.log("buttons.controllType is", buttons.controllType);
 
-                buttons.controllType === "TEXTBOX"
+                return buttons.controllType === "TEXTBOX"
                   ? setDisabled(false)
                   : setDisabled(true);
               }),
@@ -405,7 +404,7 @@ const Screen = (props) => {
       ? handleOther()
       : setResponse(response + "," + buttonText);
   };
-
+  console.log(questions);
   return (
     <div className={props.screen}>
       <>
@@ -433,8 +432,6 @@ const Screen = (props) => {
           sendButton={sendButton}
           textBoxClass={textBoxClass}
           disabled={disabled}
-          // responseText={res}
-
           question={questions[qindex].question}
           response={response}
           setResponse={setResponse}

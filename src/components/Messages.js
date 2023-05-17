@@ -2,7 +2,6 @@ import React from "react";
 import "../App.css";
 import Buttons from "./Buttons";
 import Dropdown from "./Dropdown";
-import Textbox from "./Textbox";
 
 const Messages = ({
   i,
