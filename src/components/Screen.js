@@ -327,35 +327,28 @@ const Screen = (props) => {
       options: questions[qindex].options,
     },
   ]);
+
   const handleResponse = (question, response) => {
+    const isDisabled =
+      questions[qindex].options.length === 0 ||
+      questions[qindex].options.some(
+        (button) => button.controllType === "TEXTBOX"
+      );
+
     setResponses([
       ...responses,
-
       {
         isUserResponse: true,
         answer: response,
-        setDisabled:
-          questions[qindex].options.length === 0
-            ? setDisabled(false)
-            : questions[qindex].options.map((buttons, index) => {
-                console.log("buttons.controllType is", buttons.controllType);
-
-                return buttons.controllType === "TEXTBOX"
-                  ? setDisabled(false)
-                  : setDisabled(true);
-              }),
       },
-
       {
         isUserResponse: false,
         answer: questions[qindex + 1].question,
         options: questions[qindex + 1].options,
-        setDisabled:
-          questions[qindex + 1].options.length === 0
-            ? setDisabled(false)
-            : setDisabled(true),
       },
     ]);
+
+    setDisabled(isDisabled);
     setqindex(qindex + 1);
   };
 
@@ -396,13 +389,24 @@ const Screen = (props) => {
   const textBoxClass =
     " bg-pink flex justify-start px-2 py-4 rounded-3xl w-2/3 mt-16";
   const handleAddButton = (buttonText) => {
-    questions[qindex].multiSelect === true ? setResponse("") : setResponse("");
+    if (
+      questions[qindex].multiSelect === false &&
+      questions[qindex].options.map((button, index) => {
+        return button.required === true;
+      })
+    ) {
+      setDisabled(false);
+    } else {
+      questions[qindex].multiSelect === true
+        ? setResponse("")
+        : setResponse("");
 
-    questions[qindex].multiSelect === true && buttonText === "None"
-      ? handleNone(buttonText)
-      : questions[qindex].multiSelect === true && buttonText === "Others"
-      ? handleOther()
-      : setResponse(response + "," + buttonText);
+      questions[qindex].multiSelect === true && buttonText === "None"
+        ? handleNone(buttonText)
+        : questions[qindex].multiSelect === true && buttonText === "Others"
+        ? handleOther()
+        : setResponse(response + "," + buttonText);
+    }
   };
   console.log(questions);
   return (
@@ -418,8 +422,11 @@ const Screen = (props) => {
               handleAddButton={handleAddButton}
               qindex={qindex}
               index={index}
+              setResponse={setResponse}
               questionClass={questionClass}
               answerClass={answerClass}
+              disabled={disabled}
+              setDisabled={setDisabled}
               handlesResponse={handleButtonResponse}
               handleCountryResponse={handleCountryResponse}
             />
@@ -435,10 +442,8 @@ const Screen = (props) => {
           question={questions[qindex].question}
           response={response}
           setResponse={setResponse}
-          qarr={questions}
           index={questions[qindex]}
           setDisabled={setDisabled}
-          i={qindex}
         />
       )}
     </div>

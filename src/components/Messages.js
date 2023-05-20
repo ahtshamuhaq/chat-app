@@ -9,11 +9,11 @@ const Messages = ({
   item,
   handlesResponse,
   handleCountryResponse,
-  response,
-  setResponse,
-  question,
+  disabled,
+  setDisabled,
   addButton,
   handleResponse,
+  setResponse,
   handleAddButton,
 }) => {
   return !item.isUserResponse ? (
@@ -29,6 +29,8 @@ const Messages = ({
                 <Buttons
                   items={button}
                   onClick={handlesResponse}
+                  setDisabled={setDisabled}
+                  setResponse={setResponse}
                   index={index}
                   addButton={addButton}
                   handleAddButton={handleAddButton}
