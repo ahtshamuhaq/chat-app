@@ -1,8 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Messages from "./Messages";
 import Textbox from "./Textbox";
 
 const Screen = (props) => {
+  const containerRef = useRef(null);
+
+  const scrollToBottom = () => {
+    const container = containerRef.current;
+    container.scrollTop = container.scrollHeight;
+  };
   const questions = [
     {
       controllType: "LABEL",
@@ -397,15 +403,23 @@ const Screen = (props) => {
     ) {
       setDisabled(false);
     } else {
-      questions[qindex].multiSelect === true
-        ? setResponse("")
-        : setResponse("");
+      const buttonExists = response.includes(buttonText);
 
-      questions[qindex].multiSelect === true && buttonText === "None"
-        ? handleNone(buttonText)
-        : questions[qindex].multiSelect === true && buttonText === "Others"
-        ? handleOther()
-        : setResponse(response + "," + buttonText);
+      if (buttonExists) {
+        // Remove the button from the response
+        const updatedResponse = response.replace(buttonText + ",", "");
+        setResponse(updatedResponse);
+      } else {
+        questions[qindex].multiSelect === true
+          ? setResponse("")
+          : setResponse("");
+
+        questions[qindex].multiSelect === true && buttonText === "None"
+          ? handleNone(buttonText)
+          : questions[qindex].multiSelect === true && buttonText === "Others"
+          ? handleOther()
+          : setResponse(buttonText + "," + response);
+      }
     }
   };
   console.log(questions);
@@ -421,6 +435,8 @@ const Screen = (props) => {
               item={item}
               handleAddButton={handleAddButton}
               qindex={qindex}
+              containerRef={containerRef}
+              scrollToBottom={scrollToBottom}
               index={index}
               setResponse={setResponse}
               questionClass={questionClass}

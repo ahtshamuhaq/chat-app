@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../App.css";
 import Buttons from "./Buttons";
 import Dropdown from "./Dropdown";
@@ -10,6 +10,8 @@ const Messages = ({
   handlesResponse,
   handleCountryResponse,
   disabled,
+  containerRef,
+  scrollToBottom,
   setDisabled,
   addButton,
   handleResponse,
@@ -18,7 +20,11 @@ const Messages = ({
 }) => {
   return !item.isUserResponse ? (
     <div>
-      <div className={item.isUserResponse ? "answer" : "question"}>
+      <div
+        id="chat-container"
+        ref={containerRef}
+        className={item.isUserResponse ? "answer" : "question"}
+      >
         {item.answer}
       </div>
       <div className="flex flex-wrap  buttongrid mt-3 mb-2">

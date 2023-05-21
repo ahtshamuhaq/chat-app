@@ -18,8 +18,8 @@ body {
 }
 
 .question {
-  background-color: #696969;
   padding: 20px 10px;
+  background-color: #727397;
   border-radius: 1.125rem 1.125rem 1.125rem 0;
   width: 50%;
   word-wrap: break-word;
@@ -31,8 +31,8 @@ body {
   display: none;
 }
 .answer {
-  background-color: #7f7f80;
   margin-left: auto;
+  background-color: #5f6081;
   padding: 20px 10px;
   border-radius: 1.125rem 1.125rem 0 1.125rem;
   width: 50%;

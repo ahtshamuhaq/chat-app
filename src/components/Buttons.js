@@ -1,4 +1,5 @@
 import React from "react";
+import "./../App.css";
 
 const Buttons = (props) => {
   const handleSubmit = (e) => {
@@ -14,7 +15,7 @@ const Buttons = (props) => {
   return (
     <div>
       <button
-        className=" buttons bg-[#B2B9C1] p-4 mr-3  break-words mb-4 rounded-full text-black "
+        className=" buttons bg-primary p-4 mr-3  break-words mb-4 rounded-full text-black "
         onClick={
           props.addButton.multiSelect === false && props.items.required === true
             ? handleChange
