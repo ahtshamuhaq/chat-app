@@ -15,7 +15,7 @@ const Buttons = (props) => {
   return (
     <div>
       <button
-        className=" buttons bg-primary p-4 mr-3  break-words mb-4 rounded-full text-black "
+        className=" buttons bg-primary p-4 mr-3 border-0 break-words mb-4 rounded-full text-black "
         onClick={
           props.addButton.multiSelect === false && props.items.required === true
             ? handleChange

@@ -1,14 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Messages from "./Messages";
 import Textbox from "./Textbox";
 
 const Screen = (props) => {
-  const containerRef = useRef(null);
-
-  const scrollToBottom = () => {
-    const container = containerRef.current;
-    container.scrollTop = container.scrollHeight;
-  };
   const questions = [
     {
       controllType: "LABEL",
@@ -310,10 +304,6 @@ const Screen = (props) => {
     },
   ];
 
-  const questionClass =
-    " bg-pink flex justify-start px-2 py-4 rounded-3xl w-1/2 break-words";
-  const answerClass =
-    " bg-pink ml-auto mt-4 px-2 py-4 rounded-3xl w-1/2 break-words";
   const [qindex, setqindex] = useState(0);
   const [disabled, setDisabled] = useState(true);
   const [response, setResponse] = useState("");
@@ -388,60 +378,52 @@ const Screen = (props) => {
   };
   const handleOther = () => {
     setDisabled(false);
-    setResponse("");
+    setResponse(response);
   };
-  const sendButton =
-    "bg-blue-500 hover:bg-blue-700 text-white font-bold mt-16 ml-6  ";
-  const textBoxClass =
-    " bg-pink flex justify-start px-2 py-4 rounded-3xl w-2/3 mt-16";
+
   const handleAddButton = (buttonText) => {
+    const isMultiSelect = questions[qindex].multiSelect;
+
     if (
-      questions[qindex].multiSelect === false &&
-      questions[qindex].options.map((button, index) => {
-        return button.required === true;
-      })
+      !isMultiSelect &&
+      questions[qindex].options.some((button) => button.required)
     ) {
       setDisabled(false);
     } else {
       const buttonExists = response.includes(buttonText);
 
       if (buttonExists) {
-        // Remove the button from the response
         const updatedResponse = response.replace(buttonText + ",", "");
         setResponse(updatedResponse);
       } else {
-        questions[qindex].multiSelect === true
-          ? setResponse("")
-          : setResponse("");
+        if (isMultiSelect) {
+          setResponse("");
+        } else {
+          setResponse("");
+        }
 
-        questions[qindex].multiSelect === true && buttonText === "None"
-          ? handleNone(buttonText)
-          : questions[qindex].multiSelect === true && buttonText === "Others"
-          ? handleOther()
-          : setResponse(buttonText + "," + response);
+        if (isMultiSelect && buttonText === "None") {
+          handleNone(buttonText);
+        } else if (isMultiSelect && buttonText === "Others") {
+          handleOther();
+        } else {
+          setResponse(buttonText + (response ? "," : "") + response);
+        }
       }
     }
   };
-  console.log(questions);
+
+  //
   return (
     <div className={props.screen}>
       <>
         {responses.map((item, index) => (
           <div>
             <Messages
-              responses={responses}
-              questions={questions}
               addButton={questions[qindex]}
               item={item}
               handleAddButton={handleAddButton}
-              qindex={qindex}
-              containerRef={containerRef}
-              scrollToBottom={scrollToBottom}
-              index={index}
               setResponse={setResponse}
-              questionClass={questionClass}
-              answerClass={answerClass}
-              disabled={disabled}
               setDisabled={setDisabled}
               handlesResponse={handleButtonResponse}
               handleCountryResponse={handleCountryResponse}
@@ -452,14 +434,12 @@ const Screen = (props) => {
       {qindex < questions.length && (
         <Textbox
           handleResponse={handleResponse}
-          sendButton={sendButton}
-          textBoxClass={textBoxClass}
           disabled={disabled}
           question={questions[qindex].question}
           response={response}
           setResponse={setResponse}
-          index={questions[qindex]}
           setDisabled={setDisabled}
+          i={qindex}
         />
       )}
     </div>

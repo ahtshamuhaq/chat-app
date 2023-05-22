@@ -11,7 +11,6 @@ function CountrySelector({ handleCountryResponse, selectCountry }) {
     selectCountry(value.label);
   };
 
-  console.log(value.label);
   return (
     <div className="bg-tertiary w-full p-4 rounded-full mt-4 mb-3">
       <Select
@@ -22,11 +21,12 @@ function CountrySelector({ handleCountryResponse, selectCountry }) {
             backgroundColor: state.isFocused ? "tertiary" : "tertiary",
             borderWidth: state.isFocused ? "0px" : "0px",
             color: state.isFocused ? "tertiary" : "tertiary",
+            borderColor: state.isFocused ? "#595E88" : "#595E88",
           }),
           option: (baseStyles, state) => ({
             ...baseStyles,
-            backgroundColor: state.isFocused ? "#595E88" : "#ffffff",
-            color: state.isFocused ? "#000000" : "#000000",
+            backgroundColor: state.isFocused ? "#595E88" : "#595E88",
+            color: state.isFocused ? "#ffffff" : "#ffffff",
           }),
         }}
         value={value}

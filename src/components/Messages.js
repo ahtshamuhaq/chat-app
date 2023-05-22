@@ -4,16 +4,11 @@ import Buttons from "./Buttons";
 import Dropdown from "./Dropdown";
 
 const Messages = ({
-  i,
-  questions,
   item,
   handlesResponse,
   handleCountryResponse,
-  disabled,
-  containerRef,
   setDisabled,
   addButton,
-  handleResponse,
   setResponse,
   handleAddButton,
 }) => {
@@ -30,11 +25,7 @@ const Messages = ({
   });
   return !item.isUserResponse ? (
     <div>
-      <div
-        id="chat-container"
-        ref={containerRef}
-        className={item.isUserResponse ? "answer" : "question"}
-      >
+      <div className={item.isUserResponse ? "answer" : "question"}>
         {item.answer}
       </div>
       <div className="flex flex-wrap  buttongrid mt-3 mb-2">

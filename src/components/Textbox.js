@@ -10,6 +10,9 @@ const Textbox = (props) => {
     if (event.key === "Enter") {
       props.handleResponse(props.question, props.response);
       props.setResponse("");
+    } else if (props.i === 10) {
+      alert("CHAT ENDED");
+      props.setDisabled(true);
     }
   };
   return (
