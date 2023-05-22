@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import "../App.css";
 import Buttons from "./Buttons";
 import Dropdown from "./Dropdown";
@@ -11,13 +11,23 @@ const Messages = ({
   handleCountryResponse,
   disabled,
   containerRef,
-  scrollToBottom,
   setDisabled,
   addButton,
   handleResponse,
   setResponse,
   handleAddButton,
 }) => {
+  const messagesEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  });
   return !item.isUserResponse ? (
     <div>
       <div
@@ -53,6 +63,9 @@ const Messages = ({
   ) : (
     <>
       <div className={item.isUserResponse ? "answer" : ""}>{item.answer}</div>
+      <div style={{ float: "left", clear: "both" }}>
+        <div ref={messagesEndRef}></div>
+      </div>
     </>
   );
 };

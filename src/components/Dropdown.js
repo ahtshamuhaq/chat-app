@@ -13,15 +13,15 @@ function CountrySelector({ handleCountryResponse, selectCountry }) {
 
   console.log(value.label);
   return (
-    <div className="bg-[#595E88] w-full p-4 rounded-full mt-4 mb-3">
+    <div className="bg-tertiary w-full p-4 rounded-full mt-4 mb-3">
       <Select
         options={options}
         styles={{
           control: (baseStyles, state) => ({
             ...baseStyles,
-            backgroundColor: state.isFocused ? "#595E88" : "#595E88",
+            backgroundColor: state.isFocused ? "tertiary" : "tertiary",
             borderWidth: state.isFocused ? "0px" : "0px",
-            color: state.isFocused ? "#595E88" : "#595E88",
+            color: state.isFocused ? "tertiary" : "tertiary",
           }),
           option: (baseStyles, state) => ({
             ...baseStyles,

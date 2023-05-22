@@ -15,7 +15,7 @@ const Textbox = (props) => {
   return (
     <div className="buttonIn">
       <input
-        className="bg-[#4E4F6A] text-white  px-4 py-2 rounded-3xl w-full mt-16 input"
+        className="bg-quaternary text-white  px-4 py-2 rounded-3xl w-full mt-16 input"
         type="text"
         onKeyDown={handleKeyDown}
         disabled={props.disabled}
