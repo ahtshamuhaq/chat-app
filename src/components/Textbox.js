@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
+import Popup from "./Popup";
 
 const Textbox = (props) => {
   const last = () => {
     props.handleLastResponse(props.response);
     props.setResponse("");
+    setShowDiv(true);
   };
+  const [showDiv, setShowDiv] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -22,22 +25,29 @@ const Textbox = (props) => {
     }
   };
   return (
-    <div className="buttonIn">
-      <input
-        className="bg-quaternary text-white  px-4 py-2 rounded-3xl w-full mt-16 input"
-        type="text"
-        onKeyDown={handleKeyDown}
-        disabled={props.disabled}
-        value={props.response}
-        onChange={(e) => props.setResponse(e.target.value)}
-      />
-      <button
-        className="  butto "
-        onClick={handleSubmit}
-        disabled={props.i > 10 || props.response.length === 0 ? true : false}
-      >
-        <i className="fa fa-send" style={{ fontSize: "24px" }}></i>
-      </button>{" "}
+    <div>
+      {showDiv && <Popup />}
+      {!showDiv && (
+        <div className="buttonIn">
+          <input
+            className="bg-quaternary text-white  px-4 py-2 rounded-3xl w-full mt-16 input"
+            type="text"
+            onKeyDown={handleKeyDown}
+            disabled={props.disabled}
+            value={props.response}
+            onChange={(e) => props.setResponse(e.target.value)}
+          />
+          <button
+            className="  butto "
+            onClick={handleSubmit}
+            disabled={
+              props.i > 10 || props.response.length === 0 ? true : false
+            }
+          >
+            <i className="fa fa-send" style={{ fontSize: "24px" }}></i>
+          </button>{" "}
+        </div>
+      )}
     </div>
   );
 };
