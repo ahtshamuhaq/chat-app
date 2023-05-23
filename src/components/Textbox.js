@@ -14,10 +14,11 @@ const Textbox = (props) => {
     props.setResponse("");
   };
   const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
+    if (event.key === "Enter" && props.i === 10) {
+      last(props.response);
+    } else if (event.key === "Enter") {
       props.handleResponse(props.question, props.response);
       props.setResponse("");
-    } else if (props.i === 10) {
     }
   };
   return (
