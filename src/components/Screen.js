@@ -375,12 +375,12 @@ const Screen = (props) => {
   };
   const handleNone = (buttonText) => {
     handleButtonResponse(buttonText);
+    setResponse("");
   };
   const handleOther = () => {
     setDisabled(false);
     setResponse(response);
   };
-
   const handleAddButton = (buttonText) => {
     const isMultiSelect = questions[qindex].multiSelect;
 
@@ -393,21 +393,32 @@ const Screen = (props) => {
       const buttonExists = response.includes(buttonText);
 
       if (buttonExists) {
-        const updatedResponse = response.replace(buttonText + ",", "");
+        const updatedResponse = response
+          .split(",")
+          .filter((button) => button !== buttonText)
+          .join(",");
         setResponse(updatedResponse);
       } else {
+        let updatedResponse = response;
+
         if (isMultiSelect) {
-          setResponse("");
+          if (response === "") {
+            updatedResponse += buttonText;
+          } else {
+            updatedResponse += "," + buttonText;
+          }
         } else {
-          setResponse("");
+          updatedResponse = buttonText;
         }
+
+        setResponse(updatedResponse);
 
         if (isMultiSelect && buttonText === "None") {
           handleNone(buttonText);
         } else if (isMultiSelect && buttonText === "Others") {
           handleOther();
-        } else {
-          setResponse(buttonText + (response ? "," : "") + response);
+        } else if (!isMultiSelect && buttonText === "No") {
+          handleNone(buttonText);
         }
       }
     }
@@ -421,6 +432,7 @@ const Screen = (props) => {
           <div>
             <Messages
               addButton={questions[qindex]}
+              i={qindex}
               item={item}
               handleAddButton={handleAddButton}
               setResponse={setResponse}

@@ -6,6 +6,7 @@ import Dropdown from "./Dropdown";
 const Messages = ({
   item,
   handlesResponse,
+  i,
   handleCountryResponse,
   setDisabled,
   addButton,
@@ -38,6 +39,7 @@ const Messages = ({
                   onClick={handlesResponse}
                   setDisabled={setDisabled}
                   setResponse={setResponse}
+                  i={i}
                   index={index}
                   addButton={addButton}
                   handleAddButton={handleAddButton}

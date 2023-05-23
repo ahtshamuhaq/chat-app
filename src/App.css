@@ -74,13 +74,13 @@ body {
 .butto {
   position: absolute;
   top: 0;
-  border-radius: 0px;
+  margin-right: 15px;
   right: 0px;
-  margin-top: 3px;
+  margin-top: 10px;
   border: none;
-  height: 50px;
   cursor: pointer;
   color: white;
+  background-color: #4e4f6a;
 }
 
 @keyframes App-logo-spin {

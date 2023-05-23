@@ -3,13 +3,24 @@ import "./../App.css";
 
 const Buttons = (props) => {
   const handleSubmit = (e) => {
-    props.addButton.multiSelect === true
-      ? props.handleAddButton(props.items.name)
-      : props.onClick(props.items.name);
+    if (!props.addButton.multiSelect && !props.items.required) {
+      props.onClick(props.items.name);
+      props.setResponse("");
+    } else if (props.addButton.multiSelect === true) {
+      props.handleAddButton(props.items.name);
+    } else if (props.i > 9) {
+      props.setDisabled(true);
+    } else {
+      props.onClick(props.items.name);
+    }
   };
   const handleChange = () => {
-    props.setDisabled(false);
-    props.setResponse("");
+    if (props.i > 9) {
+      props.setDisabled(true);
+    } else {
+      props.setDisabled(false);
+      props.setResponse("");
+    }
   };
 
   return (
