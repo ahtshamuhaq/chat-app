@@ -12,7 +12,7 @@ const CustomDropdownIndicator = (props) => {
   );
 };
 
-function CountrySelector({ handleCountryResponse, selectCountry }) {
+function CountrySelector({ handleCountryResponse, selectCountry, i }) {
   const [value, setValue] = useState("");
   const options = useMemo(() => countryList().getData(), []);
 
@@ -20,10 +20,10 @@ function CountrySelector({ handleCountryResponse, selectCountry }) {
     setValue(value);
     selectCountry(value.label);
   };
-
   return (
     <div className="bg-tertiary w-full p-4 rounded-full mt-4 mb-3">
       <Select
+        isDisabled={i > 9 ? true : false}
         options={options}
         components={{ DropdownIndicator: CustomDropdownIndicator }}
         styles={{

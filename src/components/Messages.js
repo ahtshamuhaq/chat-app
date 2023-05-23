@@ -47,7 +47,7 @@ const Messages = ({
               </div>
             ) : button.controllType === "DDL" ? (
               <div className="text-black border-0 w-1/2 ">
-                <Dropdown selectCountry={handleCountryResponse} />
+                <Dropdown selectCountry={handleCountryResponse} i={i} />
               </div>
             ) : null
           )}

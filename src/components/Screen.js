@@ -349,6 +349,8 @@ const Screen = (props) => {
   };
 
   const handleButtonResponse = (responseText) => {
+    const isDisabled = qindex > 9;
+
     setResponses([
       ...responses,
       { isUserResponse: true, answer: responseText },
@@ -358,10 +360,12 @@ const Screen = (props) => {
         options: questions[qindex + 1].options,
       },
     ]);
+    setDisabled(isDisabled);
     setqindex(qindex + 1);
   };
 
   const handleCountryResponse = (countryText) => {
+    const isDisabled = qindex > 9;
     setResponses([
       ...responses,
       { isUserResponse: true, answer: countryText },
@@ -371,6 +375,7 @@ const Screen = (props) => {
         options: questions[qindex + 1].options,
       },
     ]);
+    setDisabled(isDisabled);
     setqindex(qindex + 1);
   };
   const handleNone = (buttonText) => {

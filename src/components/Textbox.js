@@ -31,8 +31,7 @@ const Textbox = (props) => {
         disabled={props.i === 10 || props.response.length === 0 ? true : false}
       >
         <i className="fa fa-send" style={{ fontSize: "24px" }}></i>
-      </button>
-      .{" "}
+      </button>{" "}
     </div>
   );
 };
