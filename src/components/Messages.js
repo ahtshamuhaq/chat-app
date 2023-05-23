@@ -29,7 +29,7 @@ const Messages = ({
       <div className={item.isUserResponse ? "answer" : "question"}>
         {item.answer}
       </div>
-      <div className="flex flex-wrap  buttongrid mt-3 mb-2">
+      <div className="flex flex-wrap  buttongrids mt-3 mb-2">
         {item.options &&
           item.options.map((button, index) =>
             button.controllType === "BUTTON" ? (
@@ -56,7 +56,7 @@ const Messages = ({
   ) : (
     <>
       <div className={item.isUserResponse ? "answer" : ""}>{item.answer}</div>
-      <div style={{ float: "left", clear: "both" }}>
+      <div style={{ marginBottom: "25px", float: "left", clear: "both" }}>
         <div ref={messagesEndRef}></div>
       </div>
     </>

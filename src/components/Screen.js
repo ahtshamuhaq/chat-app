@@ -324,6 +324,26 @@ const Screen = (props) => {
     },
   ]);
 
+  const handleLastResponse = (question, response) => {
+    const isDisabled =
+      questions[qindex].options.length === 0 ||
+      questions[qindex].options.some(
+        (button) => button.controllType === "TEXTBOX"
+      );
+
+    if (response.trim() !== "") {
+      setResponses([
+        ...responses,
+        {
+          isUserResponse: true,
+          answer: response,
+        },
+      ]);
+    }
+
+    setDisabled(isDisabled);
+  };
+
   const handleResponse = (question, response) => {
     const isDisabled =
       questions[qindex].options.length === 0 ||
@@ -451,6 +471,9 @@ const Screen = (props) => {
       {qindex < questions.length && (
         <Textbox
           handleResponse={handleResponse}
+          handleLastResponse={(response) =>
+            handleLastResponse(questions[qindex], response)
+          }
           disabled={disabled}
           question={questions[qindex].question}
           response={response}

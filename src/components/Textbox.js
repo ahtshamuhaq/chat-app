@@ -1,9 +1,16 @@
 import React from "react";
 
 const Textbox = (props) => {
+  const last = () => {
+    props.handleLastResponse(props.response);
+    props.setResponse("");
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.handleResponse(props.question, props.response);
+
+    props.i === 10
+      ? last(props.response)
+      : props.handleResponse(props.question, props.response);
     props.setResponse("");
   };
   const handleKeyDown = (event) => {
@@ -11,8 +18,6 @@ const Textbox = (props) => {
       props.handleResponse(props.question, props.response);
       props.setResponse("");
     } else if (props.i === 10) {
-      alert("CHAT ENDED");
-      props.setDisabled(true);
     }
   };
   return (
@@ -28,7 +33,7 @@ const Textbox = (props) => {
       <button
         className="  butto "
         onClick={handleSubmit}
-        disabled={props.i === 10 || props.response.length === 0 ? true : false}
+        disabled={props.i > 10 || props.response.length === 0 ? true : false}
       >
         <i className="fa fa-send" style={{ fontSize: "24px" }}></i>
       </button>{" "}
