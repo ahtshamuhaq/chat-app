@@ -16,7 +16,7 @@ body {
   height: 40vmin;
   pointer-events: none;
 }
-.modal-overlay {
+.modal-main {
   position: fixed;
   top: 0;
   left: 0;
@@ -103,7 +103,7 @@ body {
   top: 0;
   margin-right: 15px;
   right: 0px;
-  margin-top: 13px;
+  margin-top: 10px;
   border: none;
   cursor: pointer;
   color: white;

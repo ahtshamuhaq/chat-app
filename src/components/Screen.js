@@ -449,7 +449,6 @@ const Screen = (props) => {
     }
   };
 
-  //
   return (
     <div className={props.screen}>
       <>

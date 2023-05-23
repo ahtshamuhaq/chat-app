@@ -44,7 +44,7 @@ const Textbox = (props) => {
               props.i > 10 || props.response.length === 0 ? true : false
             }
           >
-            <i className="fa fa-send" style={{ fontSize: "24px" }}></i>
+            <i className="fa fa-send text-xl"></i>
           </button>{" "}
         </div>
       )}

@@ -56,7 +56,7 @@ const Messages = ({
   ) : (
     <>
       <div className={item.isUserResponse ? "answer" : ""}>{item.answer}</div>
-      <div style={{ marginBottom: "25px", float: "left", clear: "both" }}>
+      <div className="mb-6 float-left clear-both">
         <div ref={messagesEndRef}></div>
       </div>
     </>
