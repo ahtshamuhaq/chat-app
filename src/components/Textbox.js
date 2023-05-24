@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Popup from "./Popup";
 
 const Textbox = (props) => {
-  const last = () => {
+  const lastResponse = () => {
     props.handleLastResponse(props.response);
     props.setResponse("");
     setShowDiv(true);
@@ -12,13 +12,13 @@ const Textbox = (props) => {
     e.preventDefault();
 
     props.i === 10
-      ? last(props.response)
+      ? lastResponse(props.response)
       : props.handleResponse(props.question, props.response);
     props.setResponse("");
   };
   const handleKeyDown = (event) => {
     if (event.key === "Enter" && props.i === 10) {
-      last(props.response);
+      lastResponse(props.response);
     } else if (event.key === "Enter") {
       props.handleResponse(props.question, props.response);
       props.setResponse("");
@@ -26,8 +26,9 @@ const Textbox = (props) => {
   };
   return (
     <div>
-      {showDiv && <Popup />}
-      {!showDiv && (
+      {showDiv ? (
+        <Popup />
+      ) : (
         <div className="w-full relative">
           <input
             className="bg-quaternary text-white  px-4 py-2 rounded-3xl  w-full h-[50px] m-0 p-4"
