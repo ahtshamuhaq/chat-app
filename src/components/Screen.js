@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Messages from "./Messages";
 import Textbox from "./Textbox";
-
 const Screen = (props) => {
   const questions = [
     {
@@ -306,6 +305,13 @@ const Screen = (props) => {
 
   const [qindex, setqindex] = useState(0);
   const [disabled, setDisabled] = useState(true);
+  const [responses, setResponses] = useState([
+    {
+      isUserResponse: false,
+      answer: questions[qindex].question,
+      options: questions[qindex].options,
+    },
+  ]);
   const [response, setResponse] = useState("");
   useEffect(() => {
     questions[qindex].options.length === 0
@@ -316,15 +322,8 @@ const Screen = (props) => {
             : setDisabled(true);
         });
   }, [qindex]);
-  const [responses, setResponses] = useState([
-    {
-      isUserResponse: false,
-      answer: questions[qindex].question,
-      options: questions[qindex].options,
-    },
-  ]);
 
-  const handleLastResponse = (question, response) => {
+  const handleLastResponse = () => {
     const isDisabled =
       questions[qindex].options.length === 0 ||
       questions[qindex].options.some(
@@ -344,7 +343,7 @@ const Screen = (props) => {
     setDisabled(isDisabled);
   };
 
-  const handleResponse = (question, response) => {
+  const handleResponse = () => {
     const isDisabled =
       questions[qindex].options.length === 0 ||
       questions[qindex].options.some(
@@ -369,7 +368,7 @@ const Screen = (props) => {
   };
 
   const handleButtonResponse = (responseText) => {
-    const isDisabled = qindex > 9;
+    const isDisabled = questions.length - 1;
 
     setResponses([
       ...responses,
@@ -385,7 +384,7 @@ const Screen = (props) => {
   };
 
   const handleCountryResponse = (countryText) => {
-    const isDisabled = qindex > 9;
+    const isDisabled = questions.length - 1;
     setResponses([
       ...responses,
       { isUserResponse: true, answer: countryText },
@@ -427,11 +426,9 @@ const Screen = (props) => {
         let updatedResponse = response;
 
         if (isMultiSelect) {
-          if (response === "") {
-            updatedResponse += buttonText;
-          } else {
-            updatedResponse += "," + buttonText;
-          }
+          response === ""
+            ? (updatedResponse += buttonText)
+            : (updatedResponse += "," + buttonText);
         } else {
           updatedResponse = buttonText;
         }
@@ -450,13 +447,14 @@ const Screen = (props) => {
   };
 
   return (
-    <div className={props.screen}>
+    <div className=" m-auto mt-14 h-full rounded-3xl bg-quinary mb-10 w-[90%]   p-4 flex flex-col justify-between sm:w-4/5 lg:w-3/5">
       <>
-        {responses.map((item, index) => (
+        {responses.map((item) => (
           <div>
             <Messages
               addButton={questions[qindex]}
               i={qindex}
+              questions={questions}
               item={item}
               handleAddButton={handleAddButton}
               setResponse={setResponse}

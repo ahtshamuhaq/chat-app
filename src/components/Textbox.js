@@ -28,9 +28,9 @@ const Textbox = (props) => {
     <div>
       {showDiv && <Popup />}
       {!showDiv && (
-        <div className="buttonIn">
+        <div className="w-full relative">
           <input
-            className="bg-quaternary text-white  px-4 py-2 rounded-3xl w-full mt-16 input"
+            className="bg-quaternary text-white  px-4 py-2 rounded-3xl  w-full h-[50px] m-0 p-4"
             type="text"
             onKeyDown={handleKeyDown}
             disabled={props.disabled}
@@ -38,7 +38,7 @@ const Textbox = (props) => {
             onChange={(e) => props.setResponse(e.target.value)}
           />
           <button
-            className="  butto "
+            className="  absolute cursor-pointer text-white bg-quaternary mr-4 mt-2.5 border-none right-0 top-0 "
             onClick={handleSubmit}
             disabled={
               props.i > 10 || props.response.length === 0 ? true : false

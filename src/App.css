@@ -2,12 +2,7 @@ body {
   color: black;
   overflow: auto;
 }
-.show {
-  display: block;
-}
-.hide {
-  display: none;
-}
+
 .App {
   text-align: center;
 }
@@ -16,55 +11,7 @@ body {
   height: 40vmin;
   pointer-events: none;
 }
-.modal-main {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
 
-.modal {
-  background-color: #4e4f6a;
-  padding: 150px;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  position: relative;
-}
-
-.close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  height: 50px;
-  cursor: pointer;
-}
-.question {
-  padding: 20px 10px;
-  background-color: #727397;
-  border-radius: 1.125rem 1.125rem 1.125rem 0;
-  width: 50%;
-  word-wrap: break-word;
-}
-.qh {
-  display: none;
-}
-.ah {
-  display: none;
-}
-.answer {
-  margin-left: auto;
-  background-color: #5f6081;
-  padding: 20px 10px;
-  border-radius: 1.125rem 1.125rem 0 1.125rem;
-  width: 50%;
-  word-wrap: break-word;
-}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -85,30 +32,6 @@ body {
 .App-link {
   color: #61dafb;
 }
-.buttonIn {
-  width: 100%;
-  position: relative;
-}
-
-.input {
-  margin: 0px;
-  padding: 16px;
-  width: 100%;
-  height: 50px;
-  border-radius: 500px;
-}
-
-.butto {
-  position: absolute;
-  top: 0;
-  margin-right: 15px;
-  right: 0px;
-  margin-top: 10px;
-  border: none;
-  cursor: pointer;
-  color: white;
-  background-color: #4e4f6a;
-}
 
 @keyframes App-logo-spin {
   from {
@@ -119,71 +42,3 @@ body {
   }
 }
 /* media Querries*/
-@media screen and (max-width: 1024px) and (min-width: 768px) {
-  .screen {
-    width: 80%;
-  }
-  .buttongrids {
-    width: 100%;
-  }
-  .buttons {
-    width: fit-content;
-  }
-}
-
-@media screen and (max-width: 767px) and (min-width: 500px) {
-  .screen {
-    width: 80%;
-  }
-  .buttongrid {
-    width: 100%;
-  }
-  .buttons {
-    width: fit-content;
-  }
-  .question {
-    background-color: #727397;
-    padding: 20px 10px;
-    border-radius: 1.5rem;
-    width: 70%;
-    word-wrap: break-word;
-  }
-  .answer {
-    background-color: #5f6081;
-    margin-left: auto;
-    padding: 20px 10px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    border-radius: 1.5rem;
-    width: 70%;
-    word-wrap: break-word;
-  }
-}
-@media screen and (max-width: 499px) and (min-width: 320px) {
-  .screen {
-    width: 90%;
-  }
-  .buttongrid {
-    width: 100%;
-  }
-  .buttons {
-    width: fit-content;
-  }
-  .question {
-    background-color: #727397;
-    padding: 20px 10px;
-    border-radius: 1.5rem;
-    width: 80%;
-    word-wrap: break-word;
-  }
-  .answer {
-    background-color: #5f6081;
-    margin-left: auto;
-    padding: 20px 10px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    border-radius: 1.5rem;
-    width: 80%;
-    word-wrap: break-word;
-  }
-}

@@ -3,7 +3,7 @@ import "./../App.css";
 
 const Buttons = (props) => {
   const handleSubmit = (e) => {
-    const isDisabled = props.i > 9;
+    const isDisabled = props.i === 10;
     if (isDisabled) {
       alert("CHAT IS ALREADY ENDED");
       props.setDisabled(true);
@@ -17,7 +17,7 @@ const Buttons = (props) => {
     }
   };
   const handleChange = () => {
-    if (props.i > 9) {
+    if (props.i === 10) {
       props.setDisabled(true);
     } else {
       props.setDisabled(false);
@@ -28,9 +28,9 @@ const Buttons = (props) => {
   return (
     <div>
       <button
-        className=" buttons bg-primary p-4 mr-3 w-fit border-0 break-words mb-4 rounded-full text-black "
+        className=" bg-primary p-4 mr-3 w-fit border-0 break-words mb-4 rounded-full text-black "
         onClick={
-          props.addButton.multiSelect === false && props.items.required === true
+          !props.addButton.multiSelect && props.items.required
             ? handleChange
             : handleSubmit
         }

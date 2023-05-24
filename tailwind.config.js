@@ -9,6 +9,7 @@ module.exports = {
         tertiary: "#595E88",
         quaternary: "#4E4F6A",
         quinary: "#8F8F8F",
+        quinary2: "#5f6081",
       },
     },
   },
