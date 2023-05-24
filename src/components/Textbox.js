@@ -42,7 +42,7 @@ const Textbox = (props) => {
             className="  absolute cursor-pointer text-white bg-quaternary mr-4 mt-2.5 border-none right-0 top-0 "
             onClick={handleSubmit}
             disabled={
-              props.i > 10 || props.response.length === 0 ? true : false
+              props.i === 11 || props.response.length === 0 ? true : false
             }
           >
             <i className="fa fa-send text-xl"></i>
